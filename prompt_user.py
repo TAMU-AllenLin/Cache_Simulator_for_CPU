@@ -21,4 +21,26 @@ def user_input():
         except ValueError:
             print("Please enter valid integer for sizes.")
     
+def get_memory_acceses():
+    mode = input("Enter mode ('manual' or 'file'): ").strip().lower()
     
+    if mode == 'manual':
+        addresses = input("Enter memory addresses (decima or hex) seperated by commas: ")
+        
+        return (int(addr, 0) for addr in addresses.split(',')) #int(addr,0) will handle hex and decimal
+    
+    elif mode == 'file':
+        file_name = input("Enter file name (ex- trace.txt): " )
+        accesses = []
+        
+        with open(file_name) as f:
+            for line in f:
+                parts = line.strip().split()
+                if parts:
+                    addr_str = parts[-1] #last part is the address 
+                    accesses.append(int(addr_str, 0))
+        return accesses
+    
+    else:
+        print("Invalid Input. Try again.")
+        return get_memory_acceses()

@@ -18,9 +18,9 @@ This project is a simple direct-mapped cache simulator written in Python. It all
 ## Project Structure 
 ```
 cache_simulator_for_CPU/
-├── grid_simulation.py  # Main simulation runner
-├── prompt_user.py      # Prompt user for inputs 
-└── README.md           # Project documentation
+├── direct_mapped_cache.py  # Main simulation runner
+├── prompt_user.py          # Prompt user for inputs 
+└── README.md               # Project documentation
 ```
 
 ---

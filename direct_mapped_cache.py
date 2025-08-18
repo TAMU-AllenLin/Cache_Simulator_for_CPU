@@ -1,4 +1,5 @@
 from prompt_user import user_input
+from prompt_user import get_memory_acceses
 
 class Cacheline: 
     def __init__(self):
@@ -59,16 +60,16 @@ class DirectMappedCache:
 if __name__ == "__main__": 
     cache_size, block_size = user_input()
     cache = DirectMappedCache(cache_size, block_size)
+    addresses = get_memory_acceses()
     
-    while True: 
-        user_address = input("Enter memory address to access ('q' to quit): ")
+    for addr in addresses:
+        cache.access(addr)
         
-        if user_address.lower() == 'q':
-            print("User quit.")
-            break 
-        try: 
-            memory_address = int(user_address)
-            cache.access(memory_address)
-            cache.stats()
-        except ValueError:
-            print("Invalid Input. Enter a number.")
+    results = cache.stats()
+    
+    print("\n Simulation Results")
+    for key, value in results.items():
+        if isinstance(value, float):
+            print(f"{key}: {value:.2%}")
+        else:
+            print(f"{key}: {value}")
